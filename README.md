@@ -6,10 +6,10 @@ preserve the graphical idea.
 
 ## Example
 1. ### Original
-   ![](assets/original.jpg)
+   ![](assets/original.jpeg)
 
 2. ### Naive approach (threshold effect)
-   ![](assets/not-dithered.jpg)
+   ![](assets/not-dithered.jpeg)
 
 3. ### Dithering
    ![](assets/dithered.jpg)
@@ -53,8 +53,8 @@ Repeat the steps above for every pixel of the image.
 Implement a RESTful service:
 - Use port `8080` for your HTTP server
 - Create the endpoint `/dither`. The image is sent by `POST` HTTP request, content type - `multipart/form-data`, parameter name - `image`
-- Store the processed images in the `images` directory on the server, preserving the same name and extension. Client must be able
-  to look through the processed images from directory `images` using `images` endpoint (f.e, `http://localhost:8080/images/some-image.jpg`)
+  - Store the processed images in the `images` directory on the server, preserving the same name and extension. Client must be able
+    to look through the processed images from directory `images` using `images` endpoint (f.e, `http://localhost:8080/images/some-image.jpg`)
 
 
 General requirements:
