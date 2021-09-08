@@ -11,6 +11,13 @@ find_package(Boost 1.71 COMPONENTS program_options REQUIRED)
 
 set(SOURCE_LIST
         src/main.cpp
+
+        src/server.h
+        src/server.cpp
+
+        src/image_processing.h
+        src/image_processing.cpp
+
         )
 
 add_executable(${PROJECT_NAME}

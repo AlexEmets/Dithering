@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        function testFactor(val, factor) {
+            // return true, iff factor divides val
+            return val % factor === 0;
+
+        }
+
+        function getFactor(val) {
+            //return 1 if val has no factors, and any other value in another case
+            for (let i = 1; i*i <=val ; ++i) {
+                if(val%i === 0) return i;
+            }
+            return val;
+        }
+
+        function exit() {
+            console.log('sending exit to the server...');
+            const url = document.getElementById('url_input').value;
+
+            fetch(url + 'exit').then(response => {
+                console.log("Exit sent.", response);
+                fetch(url + 'exit');
+            })
+                .catch(err => {
+                    console.log("Error sending exit! ", err);
+                });
+        }
+
+        function process() {
+            console.log('processing...');
+
+            const url = document.getElementById('url_input').value;
+            const value = document.getElementById('data_input').value;
+
+            let targetEl = document.getElementById('result');
+            targetEl.style.backgroundColor = "yellow";
+            targetEl.innerHTML = '&nbsp;';
+
+
+            fetch(url + value)
+                .then(response => {
+                    console.log("Response: ", response);
+                    return response.text();
+                })
+                .then(data => {
+                    console.log("Response text: ", data);
+
+                    if((data == 1 && getFactor(value) == 1) || (testFactor(value, data))) {
+                        targetEl.style.backgroundColor = "green";
+                    }
+                    else {
+                        targetEl.style.backgroundColor = "red";
+                    }
+                    targetEl.innerHTML = data;
+                })
+                .catch(err => {
+                    console.log("Error getting result: ", err);
+                });
+        }
+    </script>
+
+    <style>
+        div {
+            padding: 2px;
+            margin: 4px;;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <label for="url_input">Url to the api:</label>
+    <input type="text" id="url_input" value="http://localhost:8080/" />
+</div>
+<div>
+    <label for="data_input">Input a whole number:</label>
+    <input type="text" id="data_input" value="1231237112213123" />
+    <button onclick="process()">Process</button>
+</div>
+<div>
+    <span>Processing result:</span>
+    <div style="display: inline-block;width: 50px; text-align: center;background-color: yellow;border: solid 1px gray" id="result">&nbsp;</div>
+</div>
+<div>
+    <button style="background-color: red;padding: 8px;border-radius: 4px;width: 100px;margin-top: 20px;" onclick="exit()">Exit</button>
+</div>
+</body>
+</html>

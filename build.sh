@@ -1,5 +1,6 @@
 #!/bin/bash
 mkdir -p build && cd build
 cmake ..
-cmake --build .
+#cmake --build .
+g++ -Wall -Wextra -pedantic -pthread -o Dithering ../src/main.cpp ../src/server.cpp -ljpeg
 ./Dithering
