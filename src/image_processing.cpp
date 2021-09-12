@@ -1,4 +1,6 @@
-#include"image_processing.h"
+#include <boost/gil/extension/io/jpeg.hpp>
+#include <iostream>
+using namespace boost::gil;
 void colorToGreyScale(const std::string& inputFileName, const std::string& outputFileName) {
         rgb8_image_t img;
         read_image(inputFileName, img, jpeg_tag{});
